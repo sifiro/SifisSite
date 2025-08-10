@@ -1,0 +1,125 @@
+---
+import { awesomeLists } from "../../data/exportContent";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+    <awesome-list data-awesomeList={JSON.stringify(awesomeLists)}>
+        <aside>
+            {
+                awesomeLists.map((e) => (
+                    <>
+                        <a class="SuperCat">{e.name}</a>
+                        <br />
+                    </>
+                ))
+            }
+        </aside>
+        <aside>
+            <div id="root"></div>
+        </aside>
+    </awesome-list>
+</BaseLayout>
+
+<style>
+    .SuperCat {
+        padding: 5px;
+    }
+
+    :hover .SuperCat {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    import { RegularCat, SuperCat, CatType } from "../../data/typeDatas";
+    const headerTable = ["Name","Description",];
+
+    function setCat(cat: RegularCat, body: Element) {
+        let subBody: Element = document.createElement("div");
+        let sample: Element;
+
+        sample = document.createElement("div");
+        sample.textContent = cat.name + ":";
+        body.append(sample);
+        
+        headerTable.forEach(e=>
+        {
+            sample = document.createElement("th");
+            sample.innerHTML = e;
+        })
+
+        cat.lists.forEach((e) => {
+            sample = document.createElement("div");
+            sample.innerHTML = e.name;
+            subBody.appendChild(sample);
+        });
+        body.append(subBody);
+    }
+
+    function setSuperCat(cat: SuperCat, body: Element) {
+        let subBody: Element = document.createElement("div");
+        let catText: Element;
+        let subCatBody: Element;
+        catText = document.createElement("div");
+        catText.textContent = cat.name;
+        subBody.appendChild(catText);
+        cat.lists.forEach((e) => {
+            subCatBody = document.createElement("div");
+            setCat(e, subCatBody);
+            subBody.appendChild(subCatBody);
+        });
+
+        body.appendChild(subBody);
+    }
+
+    class awesomeList extends HTMLElement {
+        superLayoutId = -1;
+        awesomeList: Array<SuperCat | RegularCat> = [];
+        body: Element = Element.prototype;
+
+        setClickSelection(index: number) {
+            this.body.innerHTML = "";
+            this.superLayoutId = index;
+
+            switch (this.awesomeList[index].type) {
+                case CatType.Cat:
+                    setCat(this.awesomeList[index], this.body);
+                    break;
+                case CatType.SuperCat:
+                    setSuperCat(this.awesomeList[index], this.body);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        connectedCallback() {
+            console.log("It's loading");
+            const body = document.getElementById("root");
+
+            if (!body) {
+                console.log("No Body");
+                return;
+            }
+            this.body = body;
+
+            const buttons = document.querySelectorAll("a.SuperCat");
+            const awesomeListString = this.dataset.awesomelist;
+            if (!awesomeListString) {
+                console.log("No Awesomelist");
+                return;
+            }
+
+            this.awesomeList = JSON.parse(awesomeListString) as Array<
+                SuperCat | RegularCat
+            >;
+            // Handle clicks on each button.
+            buttons.forEach((button, index) => {
+                button.addEventListener("click", () => this.setClickSelection(index));
+            });
+        }
+    }
+
+    customElements.define("awesome-list", awesomeList);
+</script>
