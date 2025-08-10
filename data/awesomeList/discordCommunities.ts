@@ -61,11 +61,11 @@ const discordCommunities: RegularCat = {
             category: ["Anime"]
         },
         {
-            name: "Modding For You!",
-            url: "",
+            name: "La Madriguera LGBT+",
+            url: "https://x.com/Madriguera_lgbt",
             img: "",
-            description: "",
-            category: ["Anime"]
+            description: "Comunidad GameDev LGTB+",
+            category: ["gamedev"]
         },
     ]
 };

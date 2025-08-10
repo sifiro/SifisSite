@@ -10,7 +10,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 awesomeLists.map((e) => (
                     <>
                         <a class="SuperCat">{e.name}</a>
-                        <br />
                     </>
                 ))
             }
@@ -32,28 +31,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <script>
+    interface StringDictionary {
+        [index: string]: number;
+    }
+
     import { RegularCat, SuperCat, CatType } from "../../data/typeDatas";
-    const headerTable = ["Name","Description",];
+    const headerTable = ["Name", "Category", "url", "img"];
+    const contentFieldTable = ["name", "description"];
 
     function setCat(cat: RegularCat, body: Element) {
         let subBody: Element = document.createElement("div");
+        let tableRoot = document.createElement("table");
         let sample: Element;
 
         sample = document.createElement("div");
         sample.textContent = cat.name + ":";
         body.append(sample);
-        
-        headerTable.forEach(e=>
-        {
+
+        let trBody: Element;
+
+        trBody = document.createElement("tr");
+        headerTable.forEach((e) => {
             sample = document.createElement("th");
             sample.innerHTML = e;
-        })
-
-        cat.lists.forEach((e) => {
-            sample = document.createElement("div");
-            sample.innerHTML = e.name;
-            subBody.appendChild(sample);
+            trBody.append(sample);
         });
+
+        tableRoot.append(trBody);
+
+        cat.lists.forEach((item) => {
+            trBody = document.createElement("tr");
+
+            Object.entries(item).forEach((e) => {
+                sample = document.createElement("td");
+                sample.innerHTML = e[1];
+                trBody.appendChild(sample);
+            });
+            /*contentFieldTable.forEach((field) => {
+                sample = document.createElement("td");
+                const text = item[field as keyof typeof item];
+                if (!text || typeof text !== "string") {
+                    return;
+                }
+                sample.textContent = text;
+            });*/
+
+            tableRoot.append(trBody);
+        });
+
+        subBody.append(tableRoot);
         body.append(subBody);
     }
 
@@ -116,7 +142,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             >;
             // Handle clicks on each button.
             buttons.forEach((button, index) => {
-                button.addEventListener("click", () => this.setClickSelection(index));
+                button.addEventListener("click", () =>
+                    this.setClickSelection(index),
+                );
             });
         }
     }

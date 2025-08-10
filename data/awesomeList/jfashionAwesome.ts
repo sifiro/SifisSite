@@ -3,11 +3,11 @@ import { CatType, type Base, type RegularCat, type SuperCat } from "../typeDatas
 const shops: RegularCat = {
     name: "Shops",
     lists: [{
-        name: "Jersey Maid",
-        url: "",
+        name: "Lolita Wardrobe",
+        url: "https://lolitawardrobe.com/",
         img: "",
-        description: "",
-        category: [""]
+        description: "Tienda de Lolita Fashion que admite IOSS",
+        category: ["egl"]
     }
     ],
     type: CatType.Cat
@@ -18,7 +18,7 @@ const styles: RegularCat = {
     lists: [
         {
             name: "Jersey Maid",
-            url: "",
+            url: "https://j-fashion.fandom.com/wiki/Jersey_Maid",
             img: "",
             description: "",
             category: [""]

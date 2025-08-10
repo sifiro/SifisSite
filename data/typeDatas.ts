@@ -5,11 +5,11 @@ export enum CatType {
 };
 
 export interface Base {
-    name: string;
-    category: Array<string>;
-    url: string;
-    img: string;
-    description: string;
+    "name": string;
+    "category": Array<string>;
+    "url": string;
+    "img": string;
+    "description": string;
 }
 
 export class CatBase {

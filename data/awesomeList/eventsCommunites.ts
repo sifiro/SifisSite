@@ -6,7 +6,7 @@ export const eventCommunities: RegularCat = {
         {
             name: "Japan Asian",
             category: ["anime"],
-            description: "",
+            description: "Evento de Sanlucar y El Puerto",
             url: "",
             img: ""
         },
@@ -15,35 +15,35 @@ export const eventCommunities: RegularCat = {
             category: ["anime"],
             url: "",
             img: "",
-            description: ""
+            description: "Evento Aleman de Manga, con cierta fama"
         },
         {
-            name: "MCM",
+            name: "MCM ComicCon London",
             category: ["anime"],
             url: "",
             img: "",
-            description: ""
+            description: "Evento Londiense de Manga (Me gusto bastante)"
         },
         {
-            name: "CadizGameDev",
-            category: ["gamedev"],
-            url: "",
+            name: "Bengala",
+            category: ["gamedev", "LGTB+"],
+            url: "https://x.com/Madriguera_lgbt",
             img: "",
-            description: ""
+            description: "Evento dirigido por la Madriguera LGTB+"
         },
         {
-            name: "DevContact",
-            category: ["gamedev"],
-            url: "",
+            name: "Update Conference",
+            category: ["softdev"],
+            url: "https://prague.updateconference.net/en",
             img: "",
-            description: ""
+            description: "Evento Checo de desarrollo .NET (dirigido por mis ex-empleadores)"
         },
         {
-            name: "MalagaJam|Guadalindie",
-            category: ["gamedev"],
-            url: "",
+            name: "Listado Manga (Salones)",
+            category: ["anime"],
+            url: "https://www.listadomanga.es/salones.php",
             img: "",
-            description: ""
+            description: "Listado de Salones Activos en España"
         },
     ],
     type: CatType.Cat
