@@ -37,7 +37,7 @@ const discordCommunities: RegularCat = {
             url: "",
             img: "",
             description: "",
-            category: ["GameDev", "SWDev"]
+            category: ["Gadgets"]
         },
         {
             name: "GPU Unlocking",

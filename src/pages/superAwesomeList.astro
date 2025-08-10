@@ -35,9 +35,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         [index: string]: number;
     }
 
-    import { RegularCat, SuperCat, CatType } from "../../data/typeDatas";
-    const headerTable = ["Name", "Category", "url", "img"];
+    import { RegularCat, SuperCat, CatType, type Base } from "../../data/typeDatas";
     const contentFieldTable = ["name", "description"];
+
+    const headerTable = ["Name", "Category", "Description", "url"];
+    const mapping = (e: Base)=>[
+            e.name, 
+            e.category.reduce((e,x)=>e+", "+x), 
+            e.description, 
+            e.url, 
+            ]
 
     function setCat(cat: RegularCat, body: Element) {
         let subBody: Element = document.createElement("div");
@@ -59,14 +66,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         tableRoot.append(trBody);
 
-        cat.lists.forEach((item) => {
+        cat.lists.map(mapping).forEach((item) => {
             trBody = document.createElement("tr");
 
-            Object.entries(item).forEach((e) => {
+            item.forEach((e) => {
                 sample = document.createElement("td");
-                sample.innerHTML = e[1];
+                sample.innerHTML = e ? e : '';
                 trBody.appendChild(sample);
             });
+            
             /*contentFieldTable.forEach((field) => {
                 sample = document.createElement("td");
                 const text = item[field as keyof typeof item];
@@ -98,6 +106,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         body.appendChild(subBody);
     }
+
 
     class awesomeList extends HTMLElement {
         superLayoutId = -1;

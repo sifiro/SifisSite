@@ -7,7 +7,13 @@ const cosplayResources: SuperCat = {
         {
             name: "Guias",
             type: CatType.Cat,
-            lists: []
+            lists: [{
+                name: "Qyuwi - How To Move Like An ANIME GIRL",
+                category: ["performance"],
+                url: "https://www.youtube.com/watch?v=wkBEKw6DaYA",
+                img: "",
+                description: "Tambien es interesante para captura de movimiento"
+            }]
         },
         {
             name: "Comisiones",

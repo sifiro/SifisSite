@@ -23,14 +23,14 @@ const cosplay: Array<cosplayType> = [
         seriesName: "Hololive",
         outfitName: "Debut",
         pending: "Make-up, Stocking (brokish)",
-        done: "Clothes, Shoes(sorta), ",
+        done: "Wig, Clothes, Shoes(sorta), ",
         eventPlanned: ["Cadiz 2025"]
     },
     {
-        characterName: "Suisei Hoshiicahi",
+        characterName: "Hoshimachi Suisei",
         seriesName: "Hololive",
         outfitName: "Debut",
-        pending: "Wig,",
+        pending: "Wig",
         done: "clothes",
         trackList: ["Caramel Pain (WIP)"],
     },

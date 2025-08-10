@@ -3,17 +3,31 @@ import HeaderLink from "./HeaderLink.astro";
 ---
 
 <aside class="navBar">
-
     <HeaderLink href="/">Home</HeaderLink>
     <HeaderLink href="/superAwesomeList">Super List</HeaderLink>
-    <HeaderLink href="/blog">Blog</HeaderLink>
-    <HeaderLink href="/about">About</HeaderLink>
-
+    <HeaderLink href="/mystuff">My Stuff</HeaderLink>
+    <!-- <HeaderLink href="/blog">Blog</HeaderLink> -->
+    <!-- <HeaderLink href="/about">About</HeaderLink> -->
+    <div class="socials">
+        <a href="https://twitter.com/sifiro"
+            ><img
+                src="https://88by31.neocities.org/ext%20links/0twitter.gif"
+            /></a
+        >
+    </div>
+    <div class="banners">
+        <img src="https://anlucas.neocities.org/get.gif" /> <br />
+        <img src="https://88by31.neocities.org/web/bestvieweddesktop.gif" /> <br />
+        <img src="https://88by31.neocities.org/games/yumenikki5.gif" /> <br />
+        <img src="https://capstasher.neocities.org/88x31Buttons/animu.gif" /> <br />
+        <img src="https://88by31.neocities.org/web/vscbutton.gif" /> <br />
+    </div>
 </aside>
 
 <style>
-    .navBar
-    {
+    .socials{padding-top: 20px;}
+    .banners{padding-top: 20px;}
+    .navBar {
         margin: 10px;
         position: fixed;
     }
