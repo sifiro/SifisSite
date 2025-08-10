@@ -1,8 +1,15 @@
+import type { cosplayType } from "./personalList/cosplays";
+
 export enum CatType {
     Undefinied,
     Cat,
     SuperCat,
 };
+
+
+export interface MyStuffType {
+    cosplay: Array<cosplayType>;
+}
 
 export interface Base {
     "name": string;

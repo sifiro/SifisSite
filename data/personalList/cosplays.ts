@@ -1,4 +1,4 @@
-interface cosplayType {
+export interface cosplayType {
     characterName: string;
     seriesName: string;
     outfitName?: string;
@@ -15,7 +15,7 @@ const cosplay: Array<cosplayType> = [
         seriesName: "Bocchi The Rock",
         pending: "",
         done: "",
-        trackList: ["Distorsion"],
+        trackList: ["Distorsion (Almost-100%)"],
         eventDone: ["2023"]
     },
     {

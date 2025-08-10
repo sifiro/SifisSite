@@ -1,0 +1,135 @@
+---
+import { personalStuff } from "../../data/exportContent";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+    <my-stuff data-personalStuff={JSON.stringify(personalStuff)}>
+        <aside>
+            <a class="SuperCat">Cosplay</a>
+            <a class="SuperCat">Events</a>
+        </aside>
+        <aside>
+            <div id="root"></div>
+        </aside>
+    </my-stuff>
+</BaseLayout>
+
+<style>
+    .SuperCat {
+        padding: 5px;
+    }
+
+    :hover .SuperCat {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    import type { cosplayType } from "../../data/personalList/cosplays";
+    import type { MyStuffType} from "../../data/exportContent";
+
+    const headerTable = ["Character Name", "Series Name", "OutfitName", "Pending", "Done", "Event Planned", "Event Done"];
+    const mapping = (e: cosplayType)=>[
+            e.characterName, 
+            e.seriesName, 
+            e.outfitName, 
+            e.pending, 
+            e.done, 
+        e.eventPlanned && e.eventPlanned.length !== 0 ? 
+            e.eventPlanned.reduce((x,y)=>x+","+y) : '', 
+        e.eventDone && e.eventDone.length !== 0 ? 
+            e.eventDone.reduce((x,y)=>x+","+y) : '', ]
+    
+
+    const enum EtypeContent {
+        Cosplay,
+    }
+    function setCosplayItems(cat: Array<cosplayType>, body: Element) {
+        let subBody: Element = document.createElement("div");
+        let tableRoot = document.createElement("table");
+        let sample: Element;
+
+        sample = document.createElement("div");
+        sample.textContent = "Cosplay" + ":";
+        body.append(sample);
+
+        let trBody: Element;
+
+        trBody = document.createElement("tr");
+        headerTable.forEach((e) => {
+            sample = document.createElement("th");
+            sample.innerHTML = e;
+            trBody.append(sample);
+        });
+
+        tableRoot.append(trBody);
+        console.log("")
+
+        cat.map(mapping).forEach(item=>
+        {
+            console.log("")
+            trBody = document.createElement("tr");
+
+            item.forEach((e) => {
+                
+                sample = document.createElement("td");
+                sample.innerHTML = e ? e : '';
+                trBody.appendChild(sample);
+            });
+            
+            tableRoot.append(trBody);
+        })
+
+        subBody.append(tableRoot);
+        body.append(subBody);
+    }
+
+    class myStuff extends HTMLElement {
+        myStuff!: MyStuffType;
+        superLayoutId : EtypeContent = EtypeContent.Cosplay;
+        body: Element = Element.prototype;
+
+        setClickSelection(index: number) {
+            if(!this.myStuff){return;}
+            this.body.innerHTML = "";
+            this.superLayoutId = index;
+            
+            switch (this.superLayoutId) {
+                case EtypeContent.Cosplay:
+                    setCosplayItems(this.myStuff.cosplay, this.body);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        connectedCallback() {
+            console.log("It's loading");
+            const body = document.getElementById("root");
+
+            if (!body) {
+                console.log("No Body");
+                return;
+            }
+            this.body = body;
+
+            const buttons = document.querySelectorAll("a.SuperCat");
+            const awesomeListString = this.dataset.personalstuff;
+            if (!awesomeListString) {
+                console.log("No Awesomelist");
+                return;
+            }
+
+            this.myStuff = JSON.parse(awesomeListString) as MyStuffType;
+            // Handle clicks on each button.
+            buttons.forEach((button, index) => {
+                button.addEventListener("click", () =>
+                    this.setClickSelection(index),
+                );
+            });
+        }
+    }
+
+    customElements.define("my-stuff", myStuff);
+</script>
