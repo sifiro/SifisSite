@@ -9,7 +9,6 @@ export const artistMerch: RegularCat = {
             url: "https://linktr.ee/haruneseira",
             img: "",
             description: "",
-
         },
         {
             name: "CYCLIC★REDUNDANCY",

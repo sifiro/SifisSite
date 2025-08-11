@@ -4,10 +4,17 @@ export const eventCommunities: RegularCat = {
     name: "Events",
     lists: [
         {
-            name: "Japan Asian",
+            name: "Puerto Asian Fest",
             category: ["anime"],
-            description: "Evento de Sanlucar y El Puerto",
-            url: "",
+            description: "Evento de El Puerto (Organizado por Red Tanuki Asociacion)",
+            url: "https://linktr.ee/redtanukiaso",
+            img: ""
+        },
+        {
+            name: "Asian Fest Sanlucar",
+            category: ["anime"],
+            description: "Evento de Sanlucar (Organizado por Caza Ilusiones)",
+            url: "https://www.instagram.com/asianfest_/",
             img: ""
         },
         {
