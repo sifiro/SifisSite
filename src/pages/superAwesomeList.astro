@@ -31,12 +31,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <script>
+    import {tableMaker} from '../utils/tableHelper'
+    import {RegularCat, SuperCat, CatType, type Base} from "../../data/typeDatas";
+
     interface StringDictionary {
         [index: string]: number;
     }
 
-    import {RegularCat, SuperCat, CatType, type Base} from "../../data/typeDatas";
-    const contentFieldTable = ["name", "description"];
 
     const headerTable = ["Name", "Category", "Description", "url"];
     const mapping = (e: Base)=>[
@@ -48,46 +49,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     function setCat(cat: RegularCat, body: Element) {
         let subBody: Element = document.createElement("div");
-        let tableRoot = document.createElement("table");
         let sample: Element;
 
         sample = document.createElement("div");
         sample.textContent = cat.name + ":";
         body.append(sample);
 
-        let trBody: Element;
+        subBody.append(tableMaker(headerTable, cat.lists.map(mapping)));
 
-        trBody = document.createElement("tr");
-        headerTable.forEach((e) => {
-            sample = document.createElement("th");
-            sample.innerHTML = e;
-            trBody.append(sample);
-        });
-
-        tableRoot.append(trBody);
-
-        cat.lists.map(mapping).forEach((item) => {
-            trBody = document.createElement("tr");
-
-            item.forEach((e) => {
-                sample = document.createElement("td");
-                sample.innerHTML = e ? e : '';
-                trBody.appendChild(sample);
-            });
-            
-            /*contentFieldTable.forEach((field) => {
-                sample = document.createElement("td");
-                const text = item[field as keyof typeof item];
-                if (!text || typeof text !== "string") {
-                    return;
-                }
-                sample.textContent = text;
-            });*/
-
-            tableRoot.append(trBody);
-        });
-
-        subBody.append(tableRoot);
         body.append(subBody);
     }
 
@@ -159,4 +128,5 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     customElements.define("awesome-list", awesomeList);
+
 </script>

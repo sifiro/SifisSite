@@ -28,6 +28,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script>
     import type {cosplayType} from "../../data/personalList/cosplays";
     import type {MyStuffType} from "../../data/exportContent";
+    import {tableMaker} from '../utils/tableHelper'
 
     const headerTable = [
         "Character Name", 
@@ -58,41 +59,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
     function setCosplayItems(cat: Array<cosplayType>, body: Element) {
         let subBody: Element = document.createElement("div");
-        let tableRoot = document.createElement("table");
         let sample: Element;
 
         sample = document.createElement("div");
         sample.textContent = "Cosplay" + ":";
         body.append(sample);
 
-        let trBody: Element;
-
-        trBody = document.createElement("tr");
-        headerTable.forEach((e) => {
-            sample = document.createElement("th");
-            sample.innerHTML = e;
-            trBody.append(sample);
-        });
-
-        tableRoot.append(trBody);
-        console.log("")
-
-        cat.map(mapping).forEach(item=>
-        {
-            console.log("")
-            trBody = document.createElement("tr");
-
-            item.forEach((e) => {
-                
-                sample = document.createElement("td");
-                sample.innerHTML = e ? e : '';
-                trBody.appendChild(sample);
-            });
-            
-            tableRoot.append(trBody);
-        })
-
-        subBody.append(tableRoot);
+        subBody.append(tableMaker(headerTable, cat.map(mapping)));
         body.append(subBody);
     }
 
