@@ -128,6 +128,27 @@ const brands: RegularCat = {
             url: "https://epetice.com/",
             img: "",
             description: ""
+        },
+        {
+            name: "ililil",
+            category: ["alt"],
+            url: "lit.link/ilililjp",
+            img: "",
+            description: ""
+        },
+        {
+            name: "gibous",
+            category: ["goth"],
+            url: "lit.link/gibous",
+            img: "",
+            description: ""
+        },
+        {
+            name: "J-Fashion Wiki - Brands",
+            category: ["wiki"],
+            url: "https://j-fashion.fandom.com/wiki/Brands",
+            img: "",
+            description: ""
         }
     ],
     type: CatType.Cat

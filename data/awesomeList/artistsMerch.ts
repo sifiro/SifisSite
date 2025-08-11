@@ -20,7 +20,7 @@ export const artistMerch: RegularCat = {
         {
             name: "Dakemichan",
             category: ["NSO", "hololive"],
-            url: "dakemi.shop",
+            url: "https://dakemi.shop",
             img: "",
             description: "Gothic & Yami Kawaii-Eske"
         },
