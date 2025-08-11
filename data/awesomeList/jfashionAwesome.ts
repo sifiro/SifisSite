@@ -1,4 +1,4 @@
-import { CatType, type Base, type RegularCat, type SuperCat } from "../typeDatas";
+import {CatType, type Base, type RegularCat, type SuperCat} from "../typeDatas";
 
 const shops: RegularCat = {
     name: "Shops",

@@ -1,4 +1,4 @@
-import { CatType, type RegularCat } from "../typeDatas";
+import {CatType, type RegularCat} from "../typeDatas";
 
 export const communities: RegularCat = {
     name: "IRL Communities",

@@ -1,4 +1,4 @@
-import { CatType, RegularCat, type SuperCat } from "../typeDatas";
+import {CatType, RegularCat, type SuperCat} from "../typeDatas";
 
 const vtubers: RegularCat = {
     name: "Vtubers",
