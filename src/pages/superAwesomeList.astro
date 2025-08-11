@@ -31,21 +31,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <script>
-    import {tableMaker} from '../utils/tableHelper'
-    import {RegularCat, SuperCat, CatType, type Base} from "../../data/typeDatas";
-
-    interface StringDictionary {
-        [index: string]: number;
-    }
+    import {createUrlFromString} from "../utils/mapperHelpers";
+    import {tableMaker} from "../utils/tableHelper";
+    import {
+        RegularCat,
+        SuperCat,
+        CatType,
+        type Base,
+   } from "../../data/typeDatas";
 
 
     const headerTable = ["Name", "Category", "Description", "url"];
-    const mapping = (e: Base)=>[
-            e.name, 
-            e.category.reduce((e,x)=>e+", "+x), 
-            e.description, 
-            e.url, 
-            ]
+    const mapping = (e: Base) => [
+        e.name,
+        e.category.reduce((e, x) => e + ", " + x),
+        e.description,
+        createUrlFromString(e.url),
+    ];
 
     function setCat(cat: RegularCat, body: Element) {
         let subBody: Element = document.createElement("div");
@@ -75,7 +77,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         body.appendChild(subBody);
     }
-
 
     class awesomeList extends HTMLElement {
         superLayoutId = -1;
@@ -128,5 +129,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     customElements.define("awesome-list", awesomeList);
-
 </script>

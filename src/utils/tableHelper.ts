@@ -1,4 +1,4 @@
-export function tableMaker(headerTable: Array<string>, content: (string | undefined)[][]) {
+export function tableMaker(headerTable: Array<string>, content: (string | Element | undefined)[][]) {
     let tableRoot = document.createElement("table");
     let sample: Element;
 
@@ -14,12 +14,19 @@ export function tableMaker(headerTable: Array<string>, content: (string | undefi
     tableRoot.append(trBody);
 
     content.forEach(item => {
-        console.log("")
         trBody = document.createElement("tr");
 
         item.forEach((e) => {
-            sample = document.createElement("td");
-            sample.innerHTML = e ? e : '';
+            if (e === undefined) { return; }
+
+            if (typeof e === 'string') {
+                sample = document.createElement("td");
+                sample.innerHTML = e ? e : '';
+            }else
+            {
+                sample = e;
+            }
+
             trBody.appendChild(sample);
         });
 
