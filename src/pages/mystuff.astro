@@ -6,8 +6,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout>
     <my-stuff data-personalStuff={JSON.stringify(personalStuff)}>
         <aside>
+            <a class="SuperCat">Events</a>
+            <a class="SuperCat">Guitars</a>
             <a class="SuperCat">Cosplay</a>
-            <!-- <a class="SuperCat">Events</a> -->
         </aside>
         <aside>
             <div id="root"></div>
@@ -28,61 +29,120 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script>
     import type {cosplayType} from "../../data/personalList/cosplays";
     import type {MyStuffType} from "../../data/exportContent";
-    import {tableMaker} from '../utils/tableHelper'
-
-    const headerTable = [
-        "Character Name", 
-        "Series Name", "OutfitName", 
-        "Pending", 
-        "Done", 
-        "Event Planned", 
-        "Event Done",
-        "TrackList (Guitar)"
-    ];
-    const mapping = (e: cosplayType)=>[
-            e.characterName, 
-            e.seriesName, 
-            e.outfitName, 
-            e.pending, 
-            e.done, 
-        e.eventPlanned && e.eventPlanned.length !== 0 ? 
-            e.eventPlanned.reduce((x,y)=>x+","+y) : '', 
-        e.eventDone && e.eventDone.length !== 0 ? 
-            e.eventDone.reduce((x,y)=>x+","+y) : '', 
-        e.trackList && e.trackList.length !== 0 ? 
-            e.trackList.reduce((x,y)=>x+","+y) : '', 
-        ]
-    
-
+    import {tableMaker} from "../utils/tableHelper";
+    import type {Guitar} from "../../data/personalList/guitars";
+import type { eventType } from "../../data/personalList/eventsStory";
     const enum EtypeContent {
+        Events,
+        Guitars,
         Cosplay,
     }
+
+    const cosplayHeaderTable = [
+        "Character Name",
+        "Series Name",
+        "Outfit Name",
+        "Pending",
+        "Done",
+        "Event Planned",
+        "Event Done",
+        "TrackList (Guitar)",
+    ];
+    
+    const cosplayMapping = (e: cosplayType) => [
+        e.characterName,
+        e.seriesName,
+        e.outfitName,
+        e.pending,
+        e.done,
+        e.eventPlanned && e.eventPlanned.length !== 0
+            ? e.eventPlanned.reduce((x, y) => x + "," + y)
+            : "",
+        e.eventDone && e.eventDone.length !== 0
+            ? e.eventDone.reduce((x, y) => x + "," + y)
+            : "",
+        e.trackList && e.trackList.length !== 0
+            ? e.trackList.reduce((x, y) => x + "," + y)
+            : "",
+    ];
+
+    const guitarHeaderTable = [
+        "Manufacturer",
+        "Type",
+        "Model",
+        "Origin",
+        "Activity Year",
+        "Description",
+    ];
+    const guitarMapping = (e: Guitar) => [
+        e.Manufacturer,
+        e.Type,
+        e.Model,
+        e.Origin,
+        e.ActivityYear,
+        e.Description,
+    ];
+
+    const eventHeaderTable = [
+        "Year",
+        "Event Name",
+        "Category",
+        "Location",
+        "Description",
+    ];
+    const eventMapping = (e: eventType) => [
+        e.year.toString(),    
+        e.eventName,
+        e.category,
+        e.location,
+        e.description
+        ];
+
+    function setGuitarItems(cat: Array<Guitar>, body: Element) {
+        setGenericTable(body, "Guitar", guitarHeaderTable, cat.map(guitarMapping));
+    }
+
     function setCosplayItems(cat: Array<cosplayType>, body: Element) {
+        setGenericTable(body, "Cosplay", cosplayHeaderTable, cat.map(cosplayMapping));
+    }
+
+    function setEventItems(cat: Array<eventType>, body: Element) {
+        setGenericTable(body, "Event", eventHeaderTable, cat.map(eventMapping));
+    }
+
+    function setGenericTable(body: Element, nameSection: string, tableHeader: Array<string>, tableContent: (string | Element | undefined)[][])
+    {
         let subBody: Element = document.createElement("div");
         let sample: Element;
 
         sample = document.createElement("div");
-        sample.textContent = "Cosplay" + ":";
+        sample.textContent = nameSection + ":";
         body.append(sample);
 
-        subBody.append(tableMaker(headerTable, cat.map(mapping)));
+        subBody.append(tableMaker(tableHeader, tableContent));
         body.append(subBody);
     }
 
     class myStuff extends HTMLElement {
         myStuff!: MyStuffType;
-        superLayoutId : EtypeContent = EtypeContent.Cosplay;
+        superLayoutId: EtypeContent = EtypeContent.Cosplay;
         body: Element = Element.prototype;
 
         setClickSelection(index: number) {
-            if(!this.myStuff){return;}
+            if (!this.myStuff) {
+                return;
+            }
             this.body.innerHTML = "";
             this.superLayoutId = index;
-            
+
             switch (this.superLayoutId) {
                 case EtypeContent.Cosplay:
                     setCosplayItems(this.myStuff.cosplay, this.body);
                     break;
+                case EtypeContent.Guitars:
+                    setGuitarItems(this.myStuff.guitars, this.body);break;
+                case EtypeContent.Events:
+                    setEventItems(this.myStuff.events, this.body);break;
                 default:
                     break;
             }
