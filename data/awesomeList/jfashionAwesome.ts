@@ -132,14 +132,14 @@ const brands: RegularCat = {
         {
             name: "ililil",
             category: ["alt"],
-            url: "lit.link/ilililjp",
+            url: "https://lit.link/ilililjp",
             img: "",
             description: ""
         },
         {
             name: "gibous",
             category: ["goth"],
-            url: "lit.link/gibous",
+            url: "https://lit.link/gibous",
             img: "",
             description: ""
         },

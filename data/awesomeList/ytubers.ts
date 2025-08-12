@@ -10,6 +10,13 @@ const vtubers: RegularCat = {
             url: "https://www.youtube.com/@EineLotta",
             img: "",
             description: ""
+        },
+        {
+            name: "Deme",
+            category: [""],
+            url: "https://www.youtube.com/@demevt",
+            img: "",
+            description: ""
         }
     ]
 };
