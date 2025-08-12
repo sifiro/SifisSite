@@ -48,7 +48,7 @@ export const guitars: Array<Guitar> =
             Model: "CD60-CE",
             Origin: "China",
             BridgePickup: "Fishman Isys III System",
-            Description: "1/6 Clavijeros cambiados, Puerto Jack Remplazado (No Original)",
+            Description: "1/6 Clavijeros cambiados, cejuela cambiada, Puerto Jack Remplazado (No Original)",
             ActivityYear: "2011-"
         },
         {

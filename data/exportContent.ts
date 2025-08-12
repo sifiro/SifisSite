@@ -10,6 +10,7 @@ import {cosplay} from "./personalList/cosplays";
 import type {cosplayType} from "./personalList/cosplays";
 import {events, type eventType} from "./personalList/eventsStory";
 import {guitars, type Guitar} from "./personalList/guitars";
+import {skinCare, type skinCareType} from "./personalList/skincare";
 import type {RegularCat, SuperCat} from "./typeDatas";
 
 export const awesomeLists: ReadonlyArray<SuperCat | RegularCat> = [
@@ -27,6 +28,7 @@ export interface MyStuffType {
     cosplay: Array<cosplayType>;
     guitars: Array<Guitar>;
     events: Array<eventType>;
+    skinCare: Array<skinCareType>
 }
 
 export const personalStuff: MyStuffType =
@@ -34,4 +36,5 @@ export const personalStuff: MyStuffType =
     cosplay: cosplay,
     guitars: guitars,
     events: events,
+    skinCare: skinCare
 }

@@ -34,7 +34,7 @@ const vtubers: RegularCat = {
         },
         {
             name: "Elly Clips",
-            category: [],
+            category: [""],
             url: "https://www.youtube.com/@EllyTwitchClips",
             img: "",
             description: "Ironicamente español es mi primera lengua pero me gustan los \"Word of the day in Spanish\""

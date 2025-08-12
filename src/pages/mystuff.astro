@@ -8,6 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <aside>
             <a class="SuperCat">Events</a>
             <a class="SuperCat">Guitars</a>
+            <a class="SuperCat">Skin Care</a>
             <a class="SuperCat">Cosplay</a>
         </aside>
         <aside>
@@ -31,10 +32,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     import type {MyStuffType} from "../../data/exportContent";
     import {tableMaker} from "../utils/tableHelper";
     import type {Guitar} from "../../data/personalList/guitars";
-import type { eventType } from "../../data/personalList/eventsStory";
+    import type {skinCareType} from "../../data/personalList/skincare";
+    import type {eventType} from "../../data/personalList/eventsStory";
+    
     const enum EtypeContent {
         Events,
         Guitars,
+        SkinCare,
         Cosplay,
     }
 
@@ -64,6 +68,19 @@ import type { eventType } from "../../data/personalList/eventsStory";
         e.trackList && e.trackList.length !== 0
             ? e.trackList.reduce((x, y) => x + "," + y)
             : "",
+    ];
+
+    const skincareHeaderTable = [
+        "Type",
+        "Manufacturer",
+        "Model",
+        "Activity Year",
+    ];
+    const skincareMapping = (e: skinCareType) => [
+        e.type,
+        e.manufacturer,
+        e.model,
+        e.activityYear
     ];
 
     const guitarHeaderTable = [
@@ -106,6 +123,10 @@ import type { eventType } from "../../data/personalList/eventsStory";
         setGenericTable(body, "Cosplay", cosplayHeaderTable, cat.map(cosplayMapping));
     }
 
+    function setSkinCareItems(cat: Array<skinCareType>, body: Element) {
+        setGenericTable(body, "Skin Care", skincareHeaderTable, cat.map(skincareMapping));
+    }
+
     function setEventItems(cat: Array<eventType>, body: Element) {
         setGenericTable(body, "Event", eventHeaderTable, cat.map(eventMapping));
     }
@@ -138,6 +159,9 @@ import type { eventType } from "../../data/personalList/eventsStory";
             switch (this.superLayoutId) {
                 case EtypeContent.Cosplay:
                     setCosplayItems(this.myStuff.cosplay, this.body);
+                    break;
+                case EtypeContent.SkinCare:
+                    setSkinCareItems(this.myStuff.skinCare, this.body);
                     break;
                 case EtypeContent.Guitars:
                     setGuitarItems(this.myStuff.guitars, this.body);break;
