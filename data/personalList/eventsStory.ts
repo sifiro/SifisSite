@@ -97,12 +97,12 @@ const events: Array<eventType> = [
         category: "gamejam"
     },
     {
-        eventName: "MalagaJam 17-18",
+        eventName: "Festival Manga de Cadiz 2023",
         year: 2023,
-        location: "Malaga",
+        location: "Cadiz",
         img: "",
-        description: "",
-        category: "gamejam"
+        description: "Fundacion de CadizGameDev",
+        category: "manga"
     },
     {
         eventName: "Cadiz GameDev Meetup I-II",
@@ -121,7 +121,7 @@ const events: Array<eventType> = [
         category: "manga"
     },
     {
-        eventName: "MalagaJam 19-20",
+        eventName: "MalagaJam 17-18",
         year: 2024,
         location: "Malaga",
         img: "",
@@ -140,14 +140,6 @@ const events: Array<eventType> = [
         eventName: "Mangafest Jerez Primavera 2024",
         year: 2024,
         location: "Jerez",
-        img: "",
-        description: "",
-        category: "manga"
-    },
-    {
-        eventName: "MalagaJam 19-20",
-        year: 2024,
-        location: "Malaga",
         img: "",
         description: "",
         category: "manga"
@@ -185,7 +177,7 @@ const events: Array<eventType> = [
         description: ""
     },
     {
-        eventName: "MalagaJam 21",
+        eventName: "MalagaJam 19",
         year: 2025,
         location: "Jerez",
         img: "",
