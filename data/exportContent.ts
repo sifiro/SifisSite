@@ -6,11 +6,11 @@ import {eventCommunities} from "./awesomeList/eventsCommunites";
 import {jfashionList} from "./awesomeList/jfashionAwesome";
 import {guitarResources} from "./awesomeList/musicResources";
 import {youtuber} from "./awesomeList/ytubers";
+import {EtypeContent} from "./MyStuffTableMapping";
 import {cosplay} from "./personalList/cosplays";
-import type {cosplayType} from "./personalList/cosplays";
-import {events, type eventType} from "./personalList/eventsStory";
-import {guitars, type Guitar} from "./personalList/guitars";
-import {skinCare, type skinCareType} from "./personalList/skincare";
+import {events} from "./personalList/eventsStory";
+import {guitars} from "./personalList/guitars";
+import {skinCare} from "./personalList/skincare";
 import type {RegularCat, SuperCat} from "./typeDatas";
 
 export const awesomeLists: ReadonlyArray<SuperCat | RegularCat> = [
@@ -24,17 +24,15 @@ export const awesomeLists: ReadonlyArray<SuperCat | RegularCat> = [
     guitarResources
 ]
 
-export interface MyStuffType {
-    cosplay: Array<cosplayType>;
-    guitars: Array<Guitar>;
-    events: Array<eventType>;
-    skinCare: Array<skinCareType>
-}
 
-export const personalStuff: MyStuffType =
+export type MyStuffType = {
+    [key in EtypeContent]: Array<any>;
+};
+
+export const personalStuff: MyStuffType = 
 {
-    cosplay: cosplay,
-    guitars: guitars,
-    events: events,
-    skinCare: skinCare
+    [EtypeContent.Events]: events,
+    [EtypeContent.Cosplay]: cosplay,
+    [EtypeContent.Guitars]: guitars,
+    [EtypeContent.SkinCare]: skinCare
 }

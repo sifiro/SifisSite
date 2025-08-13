@@ -72,41 +72,14 @@ import {EtypeContent} from "../../data/MyStuffTableMapping";
             if (!this.myStuff) {
                 return;
             }
+
             this.body.innerHTML = "";
             this.superLayoutId = index;
-
-            switch (this.superLayoutId) {
-                case EtypeContent.Cosplay:
-                    setGenericItems(
-                        this.superLayoutId,
-                        this.myStuff.cosplay,
-                        this.body,
-                    );
-                    break;
-                case EtypeContent.SkinCare:
-                    setGenericItems(
-                        this.superLayoutId,
-                        this.myStuff.skinCare,
-                        this.body,
-                    );
-                    break;
-                case EtypeContent.Guitars:
-                    setGenericItems(
-                        this.superLayoutId,
-                        this.myStuff.guitars,
-                        this.body,
-                    );
-                    break;
-                case EtypeContent.Events:
-                    setGenericItems(
-                        this.superLayoutId,
-                        this.myStuff.events,
-                        this.body,
-                    );
-                    break;
-                default:
-                    break;
-            }
+            setGenericItems(
+                this.superLayoutId,
+                this.myStuff[this.superLayoutId],
+                this.body,
+            );
         }
 
         connectedCallback() {
