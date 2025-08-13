@@ -1,15 +1,17 @@
 ---
 import {personalStuff} from "../../data/exportContent";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import {EtypeContent} from "../../data/MyStuffTableMapping";
 ---
 
 <BaseLayout>
     <my-stuff data-personalStuff={JSON.stringify(personalStuff)}>
         <aside>
-            <a class="SuperCat">Events</a>
-            <a class="SuperCat">Guitars</a>
-            <a class="SuperCat">Skin Care</a>
-            <a class="SuperCat">Cosplay</a>
+            {
+                Object.keys(EtypeContent)
+                    .filter((key) => isNaN(Number(key)))
+                    .map((e) => <a class="SuperCat">{e}</a>)
+            }
         </aside>
         <aside>
             <div id="root"></div>
@@ -34,105 +36,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     import type {Guitar} from "../../data/personalList/guitars";
     import type {skinCareType} from "../../data/personalList/skincare";
     import type {eventType} from "../../data/personalList/eventsStory";
-    
-    const enum EtypeContent {
-        Events,
-        Guitars,
-        SkinCare,
-        Cosplay,
-    }
+    import {EtypeContent, exportTypes} from "../../data/MyStuffTableMapping";
 
-    const cosplayHeaderTable = [
-        "Character Name",
-        "Series Name",
-        "Outfit Name",
-        "Pending",
-        "Done",
-        "Event Planned",
-        "Event Done",
-        "TrackList (Guitar)",
-    ];
-    
-    const cosplayMapping = (e: cosplayType) => [
-        e.characterName,
-        e.seriesName,
-        e.outfitName,
-        e.pending,
-        e.done,
-        e.eventPlanned && e.eventPlanned.length !== 0
-            ? e.eventPlanned.reduce((x, y) => x + "," + y)
-            : "",
-        e.eventDone && e.eventDone.length !== 0
-            ? e.eventDone.reduce((x, y) => x + "," + y)
-            : "",
-        e.trackList && e.trackList.length !== 0
-            ? e.trackList.reduce((x, y) => x + "," + y)
-            : "",
-    ];
+    const setGuitarItems = (cat: Array<Guitar>, body: Element) =>
+        setGenericTable(
+            body,
+            "Guitar",
+            exportTypes[EtypeContent.Guitars].header,
+            cat.map(exportTypes[EtypeContent.Guitars].mappingFunction),
+        );
 
-    const skincareHeaderTable = [
-        "Type",
-        "Manufacturer",
-        "Model",
-        "Activity Year",
-    ];
-    const skincareMapping = (e: skinCareType) => [
-        e.type,
-        e.manufacturer,
-        e.model,
-        e.activityYear
-    ];
+    const setCosplayItems = (cat: Array<cosplayType>, body: Element) =>
+        setGenericTable(
+            body,
+            "Cosplay",
+            exportTypes[EtypeContent.Cosplay].header,
+            cat.map(exportTypes[EtypeContent.Cosplay].mappingFunction),
+        );
 
-    const guitarHeaderTable = [
-        "Manufacturer",
-        "Type",
-        "Model",
-        "Origin",
-        "Activity Year",
-        "Description",
-    ];
-    const guitarMapping = (e: Guitar) => [
-        e.Manufacturer,
-        e.Type,
-        e.Model,
-        e.Origin,
-        e.ActivityYear,
-        e.Description,
-    ];
+    const setSkinCareItems = (cat: Array<skinCareType>, body: Element) =>
+        setGenericTable(
+            body,
+            "Skin Care",
+            exportTypes[EtypeContent.SkinCare].header,
+            cat.map(exportTypes[EtypeContent.SkinCare].mappingFunction),
+        );
 
-    const eventHeaderTable = [
-        "Year",
-        "Event Name",
-        "Category",
-        "Location",
-        "Description",
-    ];
-    const eventMapping = (e: eventType) => [
-        e.year.toString(),    
-        e.eventName,
-        e.category,
-        e.location,
-        e.description
-        ];
+    const setEventItems = (cat: Array<eventType>, body: Element) =>
+        setGenericTable(
+            body,
+            "Event",
+            exportTypes[EtypeContent.Events].header,
+            cat.map(exportTypes[EtypeContent.Events].mappingFunction),
+        );
 
-    function setGuitarItems(cat: Array<Guitar>, body: Element) {
-        setGenericTable(body, "Guitar", guitarHeaderTable, cat.map(guitarMapping));
-    }
-
-    function setCosplayItems(cat: Array<cosplayType>, body: Element) {
-        setGenericTable(body, "Cosplay", cosplayHeaderTable, cat.map(cosplayMapping));
-    }
-
-    function setSkinCareItems(cat: Array<skinCareType>, body: Element) {
-        setGenericTable(body, "Skin Care", skincareHeaderTable, cat.map(skincareMapping));
-    }
-
-    function setEventItems(cat: Array<eventType>, body: Element) {
-        setGenericTable(body, "Event", eventHeaderTable, cat.map(eventMapping));
-    }
-
-    function setGenericTable(body: Element, nameSection: string, tableHeader: Array<string>, tableContent: (string | Element | undefined)[][])
-    {
+    function setGenericTable(
+        body: Element,
+        nameSection: string,
+        tableHeader: Array<string>,
+        tableContent: (string | Element | undefined)[][],
+    ) {
         let subBody: Element = document.createElement("div");
         let sample: Element;
 
@@ -164,9 +107,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     setSkinCareItems(this.myStuff.skinCare, this.body);
                     break;
                 case EtypeContent.Guitars:
-                    setGuitarItems(this.myStuff.guitars, this.body);break;
+                    setGuitarItems(this.myStuff.guitars, this.body);
+                    break;
                 case EtypeContent.Events:
-                    setEventItems(this.myStuff.events, this.body);break;
+                    setEventItems(this.myStuff.events, this.body);
+                    break;
                 default:
                     break;
             }
