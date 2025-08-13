@@ -30,44 +30,20 @@ import {EtypeContent} from "../../data/MyStuffTableMapping";
 </style>
 
 <script>
-    import type {cosplayType} from "../../data/personalList/cosplays";
     import type {MyStuffType} from "../../data/exportContent";
     import {tableMaker} from "../utils/tableHelper";
-    import type {Guitar} from "../../data/personalList/guitars";
-    import type {skinCareType} from "../../data/personalList/skincare";
-    import type {eventType} from "../../data/personalList/eventsStory";
     import {EtypeContent, exportTypes} from "../../data/MyStuffTableMapping";
 
-    const setGuitarItems = (cat: Array<Guitar>, body: Element) =>
+    const setGenericItems = (
+        enums: EtypeContent,
+        cat: Array<any>,
+        body: Element,
+    ) =>
         setGenericTable(
             body,
-            "Guitar",
-            exportTypes[EtypeContent.Guitars].header,
-            cat.map(exportTypes[EtypeContent.Guitars].mappingFunction),
-        );
-
-    const setCosplayItems = (cat: Array<cosplayType>, body: Element) =>
-        setGenericTable(
-            body,
-            "Cosplay",
-            exportTypes[EtypeContent.Cosplay].header,
-            cat.map(exportTypes[EtypeContent.Cosplay].mappingFunction),
-        );
-
-    const setSkinCareItems = (cat: Array<skinCareType>, body: Element) =>
-        setGenericTable(
-            body,
-            "Skin Care",
-            exportTypes[EtypeContent.SkinCare].header,
-            cat.map(exportTypes[EtypeContent.SkinCare].mappingFunction),
-        );
-
-    const setEventItems = (cat: Array<eventType>, body: Element) =>
-        setGenericTable(
-            body,
-            "Event",
-            exportTypes[EtypeContent.Events].header,
-            cat.map(exportTypes[EtypeContent.Events].mappingFunction),
+            exportTypes[enums].displayName,
+            exportTypes[enums].header,
+            cat.map(exportTypes[enums].mappingFunction),
         );
 
     function setGenericTable(
@@ -101,16 +77,32 @@ import {EtypeContent} from "../../data/MyStuffTableMapping";
 
             switch (this.superLayoutId) {
                 case EtypeContent.Cosplay:
-                    setCosplayItems(this.myStuff.cosplay, this.body);
+                    setGenericItems(
+                        this.superLayoutId,
+                        this.myStuff.cosplay,
+                        this.body,
+                    );
                     break;
                 case EtypeContent.SkinCare:
-                    setSkinCareItems(this.myStuff.skinCare, this.body);
+                    setGenericItems(
+                        this.superLayoutId,
+                        this.myStuff.skinCare,
+                        this.body,
+                    );
                     break;
                 case EtypeContent.Guitars:
-                    setGuitarItems(this.myStuff.guitars, this.body);
+                    setGenericItems(
+                        this.superLayoutId,
+                        this.myStuff.guitars,
+                        this.body,
+                    );
                     break;
                 case EtypeContent.Events:
-                    setEventItems(this.myStuff.events, this.body);
+                    setGenericItems(
+                        this.superLayoutId,
+                        this.myStuff.events,
+                        this.body,
+                    );
                     break;
                 default:
                     break;

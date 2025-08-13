@@ -11,12 +11,14 @@ export enum EtypeContent {
 }
 
 type ContentTypeTable = {
+    displayName: string;
     header: Array<string>;
     mappingFunction: (e: any) => (string | undefined)[];
 };
 
 export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
     [EtypeContent.Events]: {
+        displayName: "Events",
         header: [
             "Year",
             "Event Name",
@@ -34,6 +36,7 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
             ]
     },
     [EtypeContent.Cosplay]: {
+        displayName: "Cosplay",
         header: ["Character Name",
             "Series Name",
             "Outfit Name",
@@ -60,6 +63,7 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
         ]
     },
     [EtypeContent.Guitars]: {
+        displayName: "Guitar",
         header: [
             "Manufacturer",
             "Type",
@@ -78,6 +82,7 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
         ]
     },
     [EtypeContent.SkinCare]: {
+        displayName: "SkinCare",
         header: [
             "Type",
             "Manufacturer",
