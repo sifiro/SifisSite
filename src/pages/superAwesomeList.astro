@@ -5,10 +5,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout>
     <awesome-list data-awesomeList={JSON.stringify(awesomeLists)}>
-        <aside>
+        <aside class="categoryList">
             {
-                awesomeLists.map((e) => (
-                        <a class="SuperCat">{e.name}</a>
+                awesomeLists.map((e,index) => (
+                        <button class="SuperCat">{e.name}</button>
                 ))
             }
         </aside>
@@ -19,11 +19,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <style>
+    .categoryList
+    {
+        --margin: 10px;
+        margin-left: var(--margin);
+        margin-right: var(--margin);
+        text-wrap: nowrap;
+        overflow-x: scroll;
+    }
     .SuperCat {
+        text-decoration:underline ;
         padding: 5px;
     }
 
     :hover .SuperCat {
+        
         cursor: pointer;
     }
 </style>
@@ -107,7 +117,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             }
             this.body = body;
 
-            const buttons = document.querySelectorAll("a.SuperCat");
+            const buttons = document.querySelectorAll("button.SuperCat");
             const awesomeListString = this.dataset.awesomelist;
             if (!awesomeListString) {
                 console.log("No Awesomelist");

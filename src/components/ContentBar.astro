@@ -1,0 +1,62 @@
+---
+import { personalLinks } from "../../data/profile";
+import { updates } from "../../data/updates";
+---
+
+<aside class="navBar">
+  <div>
+    <b>SNS:</b>
+    <div>
+      {
+        personalLinks.filter(e=>e.image).map((e) => (
+        <a href={e.url} aria-label={e.name}>
+          <img src={e.image} />
+        </a>
+        <br />
+        ))
+      }
+    </div>
+  </div>
+  <div>
+    <b>Updates:</b>
+    <div class="list">
+    {
+      updates.map((e) => (
+        <div>
+          <div class="date">{e.date.toDateString()}</div>
+          <div class="description">{e.description}</div>
+        </div>
+      ))
+      </div>
+    }
+  </div>
+  
+</aside>
+
+<style>
+  .list{
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y:scroll;
+    height: 200px;
+    width: 200px;
+  }
+  .socials {
+    padding-top: 20px;
+  }
+  .banners {
+    padding-top: 20px;
+  }
+  .date {
+    font-size: medium;
+  }
+  .description {
+    font-size: large;
+  }
+  .navBar {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 46px;
+    padding-right: 20px;
+  }
+</style>

@@ -1,4 +1,4 @@
-import {CatType, type Base, type RegularCat, type SuperCat} from "../typeDatas";
+import {CatType, type RegularCat, type SuperCat} from "../typeDatas";
 
 const inspiration: RegularCat = {
     name: "Inspiration / Misc",

@@ -1,4 +1,4 @@
-import {CatType, SuperCat, type RegularCat} from "../typeDatas";
+import {CatType, SuperCat} from "../typeDatas";
 
 const cosplayResources: SuperCat = {
     name: "Cosplay Resources",

@@ -1,5 +1,6 @@
 import type {cosplayType} from "./personalList/cosplays";
 import type {eventType} from "./personalList/eventsStory";
+import type { DefaultCataWithYears } from "./personalList/gadgets";
 import type {Guitar} from "./personalList/guitars";
 import type {skinCareType} from "./personalList/skincare";
 
@@ -7,7 +8,8 @@ export enum EtypeContent {
     Events,
     Guitars,
     SkinCare,
-    Cosplay
+    Cosplay,
+    Consoles
 }
 
 type ContentTypeTable = {
@@ -26,14 +28,13 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
             "Location",
             "Description",
         ],
-        mappingFunction:
-            (e: eventType) => [
-                e.year.toString(),
-                e.eventName,
-                e.category,
-                e.location,
-                e.description
-            ]
+        mappingFunction: (e: eventType) => [
+            e.year.toString(),
+            e.eventName,
+            e.category,
+            e.location,
+            e.description
+        ]
     },
     [EtypeContent.Cosplay]: {
         displayName: "Cosplay",
@@ -60,7 +61,7 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
             e.trackList && e.trackList.length !== 0
                 ? e.trackList.reduce((x, y) => x + "," + y)
                 : "",
-        ]
+        ],
     },
     [EtypeContent.Guitars]: {
         displayName: "Guitar",
@@ -95,5 +96,12 @@ export const exportTypes: { [key in EtypeContent]: ContentTypeTable } = {
             e.model,
             e.activityYear
         ]
+    },
+    [EtypeContent.Consoles]: {
+        displayName: "Consoles",
+        header: ["Name", "Year", "Description", "State"],
+        mappingFunction: function (e: DefaultCataWithYears): (string | undefined)[] {
+            return [e.name,e.year,e.description, e.state]
+        }
     }
 }

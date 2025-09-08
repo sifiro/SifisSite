@@ -11,7 +11,10 @@ import {cosplay} from "./personalList/cosplays";
 import {events} from "./personalList/eventsStory";
 import {guitars} from "./personalList/guitars";
 import {skinCare} from "./personalList/skincare";
+import {console} from "./personalList/gadgets";
 import type {RegularCat, SuperCat} from "./typeDatas";
+import { techResourcesList } from "./awesomeList/techResources";
+import { retroResourcesList } from "./awesomeList/retroResources";
 
 export const awesomeLists: ReadonlyArray<SuperCat | RegularCat> = [
     jfashionList,
@@ -21,7 +24,9 @@ export const awesomeLists: ReadonlyArray<SuperCat | RegularCat> = [
     cosplayResources,
     artistMerch,
     youtuber,
-    guitarResources
+    guitarResources,
+    techResourcesList,
+    retroResourcesList
 ]
 
 
@@ -34,5 +39,6 @@ export const personalStuff: MyStuffType =
     [EtypeContent.Events]: events,
     [EtypeContent.Cosplay]: cosplay,
     [EtypeContent.Guitars]: guitars,
-    [EtypeContent.SkinCare]: skinCare
+    [EtypeContent.SkinCare]: skinCare,
+    [EtypeContent.Consoles]: console
 }

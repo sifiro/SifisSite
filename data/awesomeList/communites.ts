@@ -37,6 +37,13 @@ export const communities: RegularCat = {
             url: "https://linktr.ee/cosplaydayoutsevilla",
             img: "",
             description: "Agrupacion Cosplayer en Sevilla"
+        },
+        {
+            name: "Anime Clubs of the United Kingdom and Ireland",
+            category: ["anime"],
+            url: "https://forums.animeuknews.net/threads/anime-clubs-of-the-united-kingdom-and-ireland.3640/",
+            img: "",
+            description: "(last update: 2011 con posts 2020) Esta lista es la que use para encontrar la de BasingStoke"
         }
     ],
     type: CatType.Cat
