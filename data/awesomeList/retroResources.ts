@@ -120,7 +120,7 @@ const idolMasterSpecific: RegularCat = {
 };
 
 export const retroResourcesList: SuperCat = {
-    name: "JFashion List",
+    name: "Retro Resources",
     lists: [
         brands,
         shops,
